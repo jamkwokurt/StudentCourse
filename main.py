@@ -49,15 +49,15 @@ try:
     course502.enrolStudent(studentRhea)
     course504.enrolStudent(studentRhea)
 
-    print("SWEN 501 students:")
-    for student in course501.studentsEnrolled:
-        print(student.name)
-    print("SWEN 502 students:")
-    for student in course502.studentsEnrolled:
-        print(student.name)
-    print("SWEN 504 students:")
-    for student in course504.studentsEnrolled:
-        print(student.name)
+    # print("SWEN 501 students:")
+    # for student in course501.studentsEnrolled:
+    #     print(student.name)
+    # print("SWEN 502 students:")
+    # for student in course502.studentsEnrolled:
+    #     print(student.name)
+    # print("SWEN 504 students:")
+    # for student in course504.studentsEnrolled:
+    #     print(student.name)
     michael.teachCourse(course501)
     karsten.teachCourse(course502)
     ali.teachCourse(course504)
@@ -66,12 +66,14 @@ try:
     course502.calculateProfit()
     course504.calculateProfit()
 
-    for course in michael.courseTeaching:
-        print("Michael teaches: " + course.name)
     michael.doMarking()
-    michael.doMarking()
-    # karsten.doMarking(course502)
-    # ali.doMarking(course504)
+    karsten.doMarking()
+    ali.doMarking()
+
+    studentYuri.getAllMarks()
+    course504.getAllStudentsMarks()
+    departmentEng.compareGPA()
+
 
 except AttributeError:
     print("Invalid enrollment")

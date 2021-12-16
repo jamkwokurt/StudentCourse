@@ -41,12 +41,19 @@ class Course(object):
                 print("Failed to enrol student " + student.name + ". " + "Number reached limit!")
 
     def getAllStudentsMarks(self):
-        for student in self.studentsEnrolled:
-            self.allStudentsMarks[student.name] = student.allMarks[self.name]
-
-        marks = self.allStudentsMarks
-        for e in range(len(marks)):
-            print(([marks for marks in marks.keys()][e], [marks for marks in marks.values()][e]))
+        if not (len(self.studentsEnrolled) == 0):
+            for student in self.studentsEnrolled:
+                if not (len(student.allMarks.values()) == 0):
+                    print("Student name: " + student.name + " id: " + str(student.id) + " mark: " + str(student.allMarks[self.name]))
+                    # self.allStudentsMarks[student.name] = student.allMarks[self.name]
+                    #
+                    # marks = self.allStudentsMarks
+                    # for e in range(len(marks)):
+                    #     print([marks for marks in marks.keys()][e], [marks for marks in marks.values()][e])
+                else:
+                    print("No marks on record")
+        else:
+            print("No student enrolled in this course " + self.name)
 
     def calculateProfit(self):
         roomCostTotal = self.roomCostPerPoint * self.points

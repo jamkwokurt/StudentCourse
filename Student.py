@@ -33,6 +33,10 @@ class Student(object):
         course.profit = course.profit + feeTotal
 
     def getAllMarks(self):
-        marks = self.allMarks
-        for e in range(len(marks)):
-            print(([marks for marks in marks.keys()][e], [marks for marks in marks.values()][e]))
+        print("All marks for student name: " + self.name + " id: " + str(self.id) + ":")
+        if not len(self.allMarks.values()) == 0:
+            marks = self.allMarks
+            for e in range(len(marks)):
+                print(([marks for marks in marks.keys()][e], [marks for marks in marks.values()][e]))
+        else:
+            print("No marks on record")
