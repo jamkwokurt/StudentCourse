@@ -23,10 +23,10 @@ class Student(object):
             print("Failed to add course " + course.name + ". " + "Number reached limit!")
 
     def payForCourse(self, course):
-        feePerPoint = 0;
-        if self.isDomesticStudent:
+        feePerPoint = 0
+        if self.isDomesticStudent == 1:
             feePerPoint = course.department.feePerpointDom
-        else:
+        elif self.isDomesticStudent == 0:
             feePerPoint = course.department.feePerpointInt
 
         feeTotal = course.points * feePerPoint

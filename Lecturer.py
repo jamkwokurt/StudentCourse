@@ -18,6 +18,7 @@ class Lecturer(object):
         if len(self.courseTeaching) < self.courseLimit:
             self.courseTeaching.append(course)
             course.lecturers.append(self)
+            print(self.name + "has been assigned to course " + course.name)
         else:
             print("Failed to teach course " + self.name + ". " + "Number reached limit!")
 

@@ -37,6 +37,7 @@ class Course(object):
             if len(self.studentsEnrolled) < self.studentLimit:
                 self.studentsEnrolled.append(student)
                 student.addCourse(self)
+                print("Student name: " + student.name + " id: " + str(student.id) + " is enrolled in course " + self.name)
             else:
                 print("Failed to enrol student " + student.name + ". " + "Number reached limit!")
 
