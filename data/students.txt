@@ -1,3 +1,4 @@
 Penny,1,10
 Yuri,0,10
 Rhea,1,10
+Jam,0,10

@@ -1,9 +1,5 @@
 import sys
-
 import Data
-from Course import Course
-from Department import Department
-from Lecturer import Lecturer
 from Student import Student
 
 sys.stdout.write("This is a Student and Course Management System\n")
@@ -12,14 +8,12 @@ departmentEng = None
 swen504 = None
 swen502 = None
 swen501 = None
-karsten = None
 michael = None
+karsten = None
 ali = None
 studentPenny = None
 studentYuri = None
 studentRhea = None
-
-
 
 
 try:
@@ -30,39 +24,6 @@ try:
     studentIDMap = {}
     for student in students:
         studentIDMap[str(student.id)] = student
-
-    # departmentEng = Department("Engineering", 70.13, 294.90)
-    # departments.append(departmentEng)
-
-    # michael = Lecturer("Michael", 35, 4)
-    # karsten = Lecturer("Karsten", 40, 4)
-    # ali = Lecturer("Ali", 30, 4)
-    #
-    # lecturers["Michael"] = michael
-    # lecturers["Karsten"] = karsten
-    # lecturers["Ali"] = ali
-    #
-    # swen501 = Course("SWEN501", departmentEng, 15, 30)
-    # swen502 = Course("SWEN502", departmentEng, 45, 30)
-    # swen504 = Course("SWEN504", departmentEng, 60, 30)
-    # courses.append(swen501)
-    # courses.append(swen502)
-    # courses.append(swen504)
-    # print(departmentEng.name + ":" + swen501.name + ":" + str(swen501.id) + ":" + str(swen501.points))
-    # print(departmentEng.name + ":" + swen502.name + ":" + str(swen502.id) + ":" + str(swen502.points))
-    # print(departmentEng.name + ":" + swen504.name + ":" + str(swen504.id) + ":" + str(swen504.points))
-    #
-    # studentPenny = Student("Penny", 1, 10)
-    # studentYuri = Student("Yuri", 0, 10)
-    # studentRhea = Student("Rhea", 1, 10)
-    # students.append(studentPenny)
-    # students.append(studentYuri)
-    # students.append(studentRhea)
-    # studentIDMap[str(studentPenny.id)] = studentPenny
-    # studentIDMap[str(studentYuri.id)] = studentYuri
-    # studentIDMap[str(studentRhea.id)] = studentRhea
-
-
 except AttributeError:
     print("Invalid attribute")
 
@@ -70,6 +31,7 @@ except AttributeError:
 # try:
 # except AttributeError:
 #     print("Invalid input")
+
 
 def assignLecturer():
     for lecturer in lecturers.values():
@@ -95,28 +57,31 @@ def enrolStudent():
     if 0 <= indexDpt < len(departments):
         department = departments[indexDpt]
         print(department.name + " selected")
-        # list courses offered by selected department and ask user to choose
-        for i in range(len(department.courses)):
-            print(str(i + 1) + ". " + department.courses[i].name)
-        print("Please select course to continue:")
-        selectionCrs = int(input())
-        indexCrs = selectionCrs - 1
-        if 0 <= indexCrs < len(department.courses):
-            course = courses[indexCrs]
-            print(course.name + " selected")
-            # list all students with id and ask for user input to enrol
-            for student in students:
-                print(str(student.id) + ". " + student.name)
-            print("Please input student ids separated by space:")
-            ids = input().split(" ")
-            if not len(ids) == 0:
-                for id in ids:
-                    student = studentIDMap[id]
-                    course.enrolStudent(student)
+        if not len(department.courses) == 0:
+            # list courses offered by selected department and ask user to choose
+            for i in range(len(department.courses)):
+                print(str(i + 1) + ". " + department.courses[i].name)
+            print("Please select course to continue:")
+            selectionCrs = int(input())
+            indexCrs = selectionCrs - 1
+            if 0 <= indexCrs < len(department.courses):
+                course = courses[indexCrs]
+                print(course.name + " selected")
+                # list all students with id and ask for user input to enrol
+                for student in students:
+                    print(str(student.id) + ". " + student.name)
+                print("Please input student ids separated by space:")
+                ids = input().split(" ")
+                if not len(ids) == 0:
+                    for id in ids:
+                        student = studentIDMap[id]
+                        course.enrolStudent(student)
+                else:
+                    print("Invalid ID input")
             else:
-                print("Invalid ID input")
+                print("Invalid course input")
         else:
-            print("Invalid course input")
+            print("There is no course under this department yet.")
     else:
         print("Invalid department input")
 
@@ -133,7 +98,7 @@ def recordGrade():
 
 
 def printCourseGrades():
-    print("Please select course to print marking")
+    print("Please select course to print marking:")
     for i in range(len(courses)):
         print(str(i + 1) + ". " + courses[i].name)
     selectionCrs = int(input())
@@ -146,14 +111,13 @@ def printCourseGrades():
 
 
 def printStudentsGrades():
-    print("Please select student to print marking")
+    print("Please select student to print marking:")
     for i in range(len(students)):
         print(str(i + 1) + ". " + students[i].name)
     selectionSt = int(input())
     indexSt = selectionSt - 1
     if 0 <= indexSt < len(students):
-        student = students[indexSt]
-        student.getAllMarks()
+        students[indexSt].getAllMarks()
     else:
         print("Invalid selection")
 
@@ -167,7 +131,12 @@ def compareGPA():
     if 0 <= indexDpt < len(departments):
         department = departments[indexDpt]
         print(department.name + " selected")
-        department.compareGPA()
+        if not len(department.courses) == 0:
+            department.compareGPA()
+        else:
+            print("There is no course under this department yet.")
+    else:
+        print("Invalid department input")
 
 
 def calculateProfit():
@@ -179,6 +148,21 @@ def calculateProfit():
     if 0 <= indexCrs < len(courses):
         course = courses[indexCrs]
         course.calculateProfit()
+    else:
+        print("Invalid selection")
+
+
+# def createStudent():
+#     print("Please input student name, student type (0 for international and 1 for domestic) "
+#           "and course limit seperated by space")
+#     studentAttributes = input().split(" ")
+#     name = studentAttributes[0]
+#     isDomestic = studentAttributes[1]
+#     courseLimit = studentAttributes[2]
+#     newStudent = Student(name, isDomestic, courseLimit)
+#     f = open("data/students.txt", "a")
+#     f.write("\n" + name + "," + isDomestic + "," + courseLimit)
+#     f.close()
 
 
 def showMenu():
@@ -210,27 +194,11 @@ def showMenu():
             calculateProfit()
         elif selection == "8":
             showMenu()
+        # elif selection == "9":
+        #     createStudent()
         else:
-            print("Invalid selection input. Please stat over")
+            print("Invalid selection input. Please start over")
             showMenu()
 
 
 showMenu()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

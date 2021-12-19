@@ -22,10 +22,8 @@ class Course(object):
         self.studentsEnrolled = []
         self.lecturers = []
         self.allStudentsMarks = {}
-
-        self.roomCostPerPoint = 500;
-        self.profit = 0;
-
+        self.roomCostPerPoint = 500
+        self.profit = 0
 
     def __str__(self):
         return self.name + ": id: " + self.id
@@ -37,7 +35,8 @@ class Course(object):
             if len(self.studentsEnrolled) < self.studentLimit:
                 self.studentsEnrolled.append(student)
                 student.addCourse(self)
-                print("Student name: " + student.name + " id: " + str(student.id) + " is enrolled in course " + self.name)
+                print(
+                    "Student name: " + student.name + " id: " + str(student.id) + " is enrolled in course " + self.name)
             else:
                 print("Failed to enrol student " + student.name + ". " + "Number reached limit!")
 
@@ -45,12 +44,8 @@ class Course(object):
         if not (len(self.studentsEnrolled) == 0):
             for student in self.studentsEnrolled:
                 if not (len(student.allMarks.values()) == 0):
-                    print("Student name: " + student.name + " id: " + str(student.id) + " mark: " + str(student.allMarks[self.name]))
-                    # self.allStudentsMarks[student.name] = student.allMarks[self.name]
-                    #
-                    # marks = self.allStudentsMarks
-                    # for e in range(len(marks)):
-                    #     print([marks for marks in marks.keys()][e], [marks for marks in marks.values()][e])
+                    print("Student name: " + student.name + " id: " + str(student.id) + " mark: " + str(
+                        student.allMarks[self.name]))
                 else:
                     print("No marks on record")
         else:
@@ -60,7 +55,6 @@ class Course(object):
         roomCostTotal = self.roomCostPerPoint * self.points
         lecturerCostTotal = 0
         for lecturer in self.lecturers:
-            lecturerCostTotal = lecturer.hourlyRate * self.points * 10 + lecturerCostTotal;
+            lecturerCostTotal = lecturer.hourlyRate * self.points * 10 + lecturerCostTotal
         self.profit = self.profit - roomCostTotal - lecturerCostTotal
-
         print(self.name + " course profit " + " = " + str(self.profit))

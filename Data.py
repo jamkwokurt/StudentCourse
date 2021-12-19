@@ -16,7 +16,7 @@ def loadDataDpt():
         dptName = dptInfo[0]
         dptDomFee = dptInfo[1]
         dptIntFee = dptInfo[2]
-        department = Department(dptName, float(dptDomFee),float(dptIntFee))
+        department = Department(dptName, float(dptDomFee), float(dptIntFee))
         departments[dptName] = department
 
 
